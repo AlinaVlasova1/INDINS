@@ -36,6 +36,7 @@ export default defineComponent({
     color: #275742;
     text-align: left;
     position: relative;
+    box-sizing: border-box;
 
     h2 {
       display: inline-block;
@@ -81,6 +82,14 @@ export default defineComponent({
       bottom: auto;
       right: 24px;
       left: auto;
+    }
+
+    .basket::after {
+      content: "";
+      width: 16px;
+      height: 16px;
+      background-color: #C95103;
+      border-radius: 8px;
     }
   }
 

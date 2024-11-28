@@ -35,7 +35,6 @@ export default defineComponent({
     color: #FFFF;
     text-align: left;
     position: relative;
-    border: 2px solid #275742;
 
     h2 {
       display: inline-block;

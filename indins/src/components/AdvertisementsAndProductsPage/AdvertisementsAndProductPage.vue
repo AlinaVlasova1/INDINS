@@ -1,10 +1,18 @@
 <script lang="ts">
 
 import {defineComponent} from "vue";
+import AdvertisementBlock from "@/components/AdvertisementsBlock/AdvertisementBlock.vue";
+import ProductsBlock from "@/components/ProductsBlock/ProductsBlock.vue";
+import {IProduct} from "@/models/product-models";
 
 export default defineComponent({
   name: "AdvertisementsAndProductPage",
-  components: {},
+  components: {ProductsBlock, AdvertisementBlock},
+  methods: {
+    addBasketProduct(product: IProduct) {
+      this.$emit("addProduct", product);
+    }
+  },
   data() {
     return {
     }
@@ -13,11 +21,16 @@ export default defineComponent({
 </script>
 
 <template>
-  <div>
-
+  <div class="advertisements-and-product-page">
+    <AdvertisementBlock></AdvertisementBlock>
+    <ProductsBlock @add-product="addBasketProduct"></ProductsBlock>
   </div>
 </template>
 
-<style scoped>
+<style>
 
+  .advertisements-and-product-page {
+    margin-top: 12px;
+    margin-bottom: 100px;
+  }
 </style>

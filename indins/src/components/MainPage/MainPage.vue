@@ -1,13 +1,25 @@
 <script lang="ts">
 
-import {defineComponent} from "vue";
+import {defineComponent, reactive} from "vue";
 import AdvertisementsAndProductPage from "@/components/AdvertisementsAndProductsPage/AdvertisementsAndProductPage.vue";
 import HeaderBlock from "@/components/Header/Header.vue";
 import FooterBlock from "@/components/Footer/Footer.vue";
+import {IProduct} from "@/models/product-models";
 
 export default defineComponent({
   name: "MainPage",
   components: {FooterBlock, HeaderBlock, AdvertisementsAndProductPage},
+  setup() {
+    const productsInBasket = reactive({products: [] as IProduct[]});
+    return {
+      productsInBasket
+    }
+  },
+  methods: {
+    addBasketProduct(product: IProduct) {
+      this.productsInBasket.products.push(product);
+    }
+  },
   data() {
     return {
     }
@@ -18,7 +30,7 @@ export default defineComponent({
 <template>
   <div class="main-page">
     <HeaderBlock></HeaderBlock>
-    <AdvertisementsAndProductPage></AdvertisementsAndProductPage>
+    <AdvertisementsAndProductPage @add-product="addBasketProduct"></AdvertisementsAndProductPage>
     <FooterBlock></FooterBlock>
   </div>
 </template>
@@ -28,7 +40,8 @@ export default defineComponent({
 
   .main-page {
     height: 100%;
-    padding: 40px 24px;
+    padding: 24px 40px;
     font-family: "Ubuntu", sans-serif;
+
   }
 </style>
