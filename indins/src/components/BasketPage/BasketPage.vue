@@ -14,6 +14,7 @@ export default defineComponent({
 </script>
 
 <template>
+  <div>BasketPage</div>
 
 </template>
 

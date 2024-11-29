@@ -7,9 +7,9 @@ export default defineComponent({
   name: "ProductCard",
   props: ['product'],
   components: {},
-  data() {
-    return {
-
+  methods: {
+    openModalProduct() {
+      this.$emit("openModalProduct", this.product.id);
     }
   },
 })
@@ -17,10 +17,12 @@ export default defineComponent({
 
 <template>
   <div class="product-card">
-    <div class="img-content">
-      <img v-bind:src="product.image" alt="product">
+    <div  @click="openModalProduct()">
+      <div class="img-content">
+        <img v-bind:src="product.image" alt="product">
+      </div>
+      <span class="card-title">{{product.title}}</span>
     </div>
-    <span class="card-title">{{product.title}}</span>
     <button class="button-buy" @click="$emit('addBasket', product)">Купить</button>
   </div>
 </template>

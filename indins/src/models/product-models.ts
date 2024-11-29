@@ -4,9 +4,17 @@ export interface IProduct {
     price: string,
     category: string,
     description: string,
-    image: string
+    image: string,
+    rating?: {
+        count: number,
+        rate: number
+    },
 }
 
 export interface IResponseProducts {
     data: IProduct[];
+}
+
+export interface IResponseProduct {
+    data: IProduct;
 }

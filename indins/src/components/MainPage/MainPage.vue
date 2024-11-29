@@ -1,10 +1,11 @@
 <script lang="ts">
 
-import {defineComponent, reactive} from "vue";
+import { defineComponent, reactive} from "vue";
 import AdvertisementsAndProductPage from "@/components/AdvertisementsAndProductsPage/AdvertisementsAndProductPage.vue";
 import HeaderBlock from "@/components/Header/Header.vue";
 import FooterBlock from "@/components/Footer/Footer.vue";
 import {IProduct} from "@/models/product-models";
+
 
 export default defineComponent({
   name: "MainPage",
@@ -12,16 +13,12 @@ export default defineComponent({
   setup() {
     const productsInBasket = reactive({products: [] as IProduct[]});
     return {
-      productsInBasket
+      productsInBasket,
     }
   },
   methods: {
     addBasketProduct(product: IProduct) {
       this.productsInBasket.products.push(product);
-    }
-  },
-  data() {
-    return {
     }
   },
 })
