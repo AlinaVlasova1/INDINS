@@ -23,7 +23,7 @@ export default defineComponent({
 <template>
   <div class="advertisements-and-product-page">
     <AdvertisementBlock></AdvertisementBlock>
-    <ProductsBlock @add-product="addBasketProduct"></ProductsBlock>
+    <ProductsBlock v-on:addProduct="addBasketProduct"></ProductsBlock>
   </div>
 </template>
 

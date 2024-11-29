@@ -33,7 +33,7 @@ export default defineComponent({
     <h1>Новинки</h1>
     <div class="products" >
       <div class="product" v-for="(product, index) in arrDisplayProducts" :key="index">
-        <ProductCard :product="product" @add-basket="addBasketProduct"></ProductCard>
+        <ProductCard :product="product" v-on:addBasket="addBasketProduct"></ProductCard>
       </div>
     </div>
   </div>

@@ -4,6 +4,7 @@ import {defineComponent} from "vue";
 export default defineComponent({
   name: "HeaderBlock",
   components: {},
+  props: ['productsInBasket'],
   data() {
     return {
     }
@@ -22,11 +23,17 @@ export default defineComponent({
     </nav>
     <div class="basket">
       <img src="../../assets/shopping_cart.svg" alt="shopping_cart" />
+      <div v-if="productsInBasket.products.length > 0" class="red-circle inherit">{{productsInBasket.products.length}}</div>
     </div>
   </header>
 </template>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet');
+
+  .inherit{
+    font-family: "Ubuntu", serif;
+  }
 
   .header {
     border: 2px solid #275742;
@@ -84,12 +91,19 @@ export default defineComponent({
       left: auto;
     }
 
-    .basket::after {
-      content: "";
+    .red-circle {
+      position: relative;
       width: 16px;
       height: 16px;
       background-color: #C95103;
       border-radius: 8px;
+      top: -40px;
+      left: 22px;
+      color: white;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 500;
+      line-height: 15px;
     }
   }
 

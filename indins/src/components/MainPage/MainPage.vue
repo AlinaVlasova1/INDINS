@@ -29,8 +29,8 @@ export default defineComponent({
 
 <template>
   <div class="main-page">
-    <HeaderBlock></HeaderBlock>
-    <AdvertisementsAndProductPage @add-product="addBasketProduct"></AdvertisementsAndProductPage>
+    <HeaderBlock :productsInBasket="productsInBasket"></HeaderBlock>
+    <AdvertisementsAndProductPage v-on:addProduct="addBasketProduct"></AdvertisementsAndProductPage>
     <FooterBlock></FooterBlock>
   </div>
 </template>
