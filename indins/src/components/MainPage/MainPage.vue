@@ -39,6 +39,5 @@ export default defineComponent({
     height: 100%;
     padding: 24px 40px;
     font-family: "Ubuntu", sans-serif;
-
   }
 </style>
