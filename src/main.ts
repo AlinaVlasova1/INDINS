@@ -22,16 +22,10 @@ const routes: RouteConfig[] = [
 ]
 
 const router:Router = new Router({
-  mode: "history",
-  routes: routes // short for `routes: routes`
+    mode: "history",
+    base: process.env.BASE_URL,
+    routes: routes // short for `routes: routes`
 })
-// const router = new VueRouter({
-//   routes // short for `routes: routes`
-// })
-// const app = new Vue({
-//   router,
-//   render: h => h(App)
-// }).$mount('#app')
 
 new Vue({
   router,
