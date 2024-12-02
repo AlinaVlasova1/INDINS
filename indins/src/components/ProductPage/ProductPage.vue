@@ -19,6 +19,12 @@ export default defineComponent({
       product: {} as IProduct
     }
   },
+  methods: {
+    addBasketProduct() {
+      this.$emit("addProduct", this.product);
+      this.$emit('close');
+    }
+  },
   created() {
     this.productService.getProductById(this.productId).then((product: IResponseProduct) => {
       this.productObj.product = product.data;
@@ -35,7 +41,7 @@ export default defineComponent({
     <div class="title">
       <h1>{{product.title}}</h1>
       <div class="cross">
-        <img src="../../assets/cross.svg" alt="cross">
+        <img src="../../assets/cross.svg" alt="cross" @click="$emit('close')">
       </div>
     </div>
     <div class="info">
@@ -45,18 +51,18 @@ export default defineComponent({
       <div class="right-pop-inner-block">
         <div class="info-second">
           <span class="title-second">Описание</span>
-          <span>{{product.description}}</span>
+          <span class="description">{{product.description}}</span>
         </div>
         <div class="info-second">
           <span class="title-second">Категория</span>
-          <span>{{productObj.product.category}}</span>
+          <span class="description">{{productObj.product.category}}</span>
         </div>
         <div class="info-second">
           <span class="title-second">Рейтинг</span>
-          <span>{{productObj.product.rating?.rate}}</span>
+          <span class="description">{{productObj.product.rating?.rate}}</span>
         </div>
         <span class="price">{{productObj.product.price}} руб.</span>
-        <button class="button-modal-buy">Купить</button>
+        <button class="button-modal-buy" @click="addBasketProduct()">Купить</button>
       </div>
     </div>
   </div>
@@ -86,7 +92,6 @@ export default defineComponent({
   text-align: left;
 
   .title {
-    height: 81px;
     width: 100%;
     background-color: #275742;
     padding-top: 41px;
@@ -100,6 +105,7 @@ export default defineComponent({
       font-size: 32px;
       margin: 0 0 0 40px;
       width: 754px;
+      display: inline-block;
       vertical-align: top;
     }
 
@@ -147,6 +153,12 @@ export default defineComponent({
           font-size: 20px;
           font-weight: 500;
           margin-top: 8px;
+        }
+
+        .description {
+          max-height: 140px;
+          display: block;
+          overflow-y: auto;
         }
       }
 

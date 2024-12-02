@@ -24,6 +24,7 @@ export default defineComponent({
   },
   methods: {
     addBasketProduct(product: IProduct) {
+      console.log("addBasketProduct ", product);
       this.$emit("addProduct", product);
     },
     openModal(id: number) {
@@ -45,10 +46,17 @@ export default defineComponent({
     <h1>Новинки</h1>
     <div class="products">
       <div class="product" v-for="(product, index) in arrDisplayProducts" :key="index">
-        <ProductCard :product="product" v-on:addBasket="addBasketProduct" v-on:openModalProduct="openModal"></ProductCard>
+        <ProductCard
+            :product="product"
+            v-on:addBasket="addBasketProduct"
+            v-on:openModalProduct="openModal"></ProductCard>
       </div>
     </div>
-    <ProductPage v-if="isModalWindowTriggered" :productId="productSelected.id"></ProductPage>
+    <ProductPage
+        v-if="isModalWindowTriggered"
+        :productId="productSelected.id"
+        v-on:addProduct="addBasketProduct"
+        v-on:close="isModalWindowTriggered = false"></ProductPage>
   </div>
 </template>
 
