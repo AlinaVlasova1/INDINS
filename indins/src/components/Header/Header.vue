@@ -18,8 +18,6 @@ export default defineComponent({
     <h2>Штуки</h2>
     <nav class="nav-menu">
       <ul>
-<!--        <li><a>Главная</a></li>-->
-<!--        <li><a>Магазин</a></li>-->
         <li><router-link to="/">Главная</router-link></li>
         <li><router-link to="/basket">Магазин</router-link></li>
       </ul>
@@ -74,10 +72,11 @@ export default defineComponent({
       li {
         display: inline-block;
 
-        a {
+        a, a:visited, a:hover, a:active {
           font-weight: 500;
           font-size: 20px;
           text-decoration: none;
+          color: inherit;
         }
       }
 

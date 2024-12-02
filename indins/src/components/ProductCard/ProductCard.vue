@@ -61,6 +61,8 @@ export default defineComponent({
       height: 44px;
       background-color: white;
       color: #275742;
+      font-size: 20px;
+      font-weight: 500;
     }
 
     .button-buy:hover {

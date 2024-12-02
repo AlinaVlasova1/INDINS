@@ -9,15 +9,36 @@ export default defineComponent({
   props: ['productsInBasket'],
   data() {
     return {
-      newArrayProductsInBasket: [] as IProductInBasket[]
+      newArrayProductsInBasket: [] as IProductInBasket[],
+      allCountProduct: 0 as number,
+      allCostProduct: 0 as number
+    }
+  },
+  methods: {
+    calculate() {
+      this.allCountProduct = 0;
+      this.allCostProduct = 0;
+      this.newArrayProductsInBasket.forEach((product: IProductInBasket) => {
+        this.allCountProduct = this.allCountProduct + product.count;
+        this.allCostProduct = this.allCostProduct + product.cost;
+      })
+    },
+    deleteProduct(id: number) {
+      const element = this.newArrayProductsInBasket.find((el) => el.id === id);
+      const index = element ? this.newArrayProductsInBasket.indexOf(element) : undefined;
+      if (index !== undefined) {
+        this.$emit("deleteProduct", {id: id, count: this.newArrayProductsInBasket[index].count});
+        this.newArrayProductsInBasket.splice(index, 1);
+      }
+      this.calculate();
+
     }
   },
   mounted() {
     this.productsInBasket.products.forEach((product: IProduct) => {
-      if (this.newArrayProductsInBasket.find(el => el.title === product.title)) {
-        const element = this.newArrayProductsInBasket.find(el => el.title === product.title);
+      if (this.newArrayProductsInBasket.find(el => el.id === product.id)) {
+        const element = this.newArrayProductsInBasket.find(el => el.id === product.id);
         const index = element ? this.newArrayProductsInBasket.indexOf(element) : undefined;
-        console.log('index', index);
         if (index !== undefined) {
           this.newArrayProductsInBasket[index].count = this.newArrayProductsInBasket[index]?.count + 1;
           this.newArrayProductsInBasket[index].cost = this.newArrayProductsInBasket[index].price * this.newArrayProductsInBasket[index]?.count
@@ -30,6 +51,7 @@ export default defineComponent({
         });
       }
     })
+    this.calculate();
   }
 })
 </script>
@@ -41,7 +63,7 @@ export default defineComponent({
       <thead>
       <tr class="row">
         <th class="title">Товар</th>
-        <th >Цена, руб</th>
+        <th>Цена, руб</th>
         <th>Кол-во</th>
         <th>Сумма, руб</th>
         <th class="button-delete"></th>
@@ -53,11 +75,20 @@ export default defineComponent({
         <td>{{product.price}}</td>
         <td>{{product.count}}</td>
         <td>{{product.cost}}</td>
-        <td><img src="../../assets/trash_bin.svg" alt="trash_bin">
-        </td>
+        <td><img src="../../assets/trash_bin.svg" alt="trash_bin"  @click="deleteProduct(product.id)"></td>
       </tr>
       </tbody>
+      <tfoot>
+      <tr class="row">
+        <th class="title">Итог</th>
+        <th></th>
+        <th>{{allCountProduct}}</th>
+        <th>{{allCostProduct}}</th>
+        <th></th>
+      </tr>
+      </tfoot>
     </table>
+    <button class="buy-all">Плачу за всё!</button>
   </div>
 
 </template>
@@ -105,6 +136,19 @@ export default defineComponent({
         }
       }
 
+    }
+
+    .buy-all {
+      width: 332px;
+      height: 52px;
+      background-color: #275742;
+      color: white;
+      font-weight: 500;
+      font-size: 24px;
+      margin-top: 60px;
+      margin-right: 0;
+      margin-left: auto;
+      display: block;
     }
   }
 </style>

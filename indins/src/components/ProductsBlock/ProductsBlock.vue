@@ -24,11 +24,9 @@ export default defineComponent({
   },
   methods: {
     addBasketProduct(product: IProduct) {
-      console.log("addBasketProduct ", product);
       this.$emit("addProduct", product);
     },
     openModal(id: number) {
-      console.log("openModal", id);
       this.isModalWindowTriggered = true;
       this.productSelected.id = id;
     }
