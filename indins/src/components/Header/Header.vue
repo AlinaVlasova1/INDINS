@@ -5,10 +5,11 @@ export default defineComponent({
   name: "HeaderBlock",
   components: {},
   props: ['productsInBasket'],
-  data() {
-    return {
+  methods: {
+    routeInBasket() {
+      this.$router.push({path: '/basket'});
     }
-  },
+  }
 })
 </script>
 
@@ -17,11 +18,13 @@ export default defineComponent({
     <h2>Штуки</h2>
     <nav class="nav-menu">
       <ul>
-        <li><a>Главная</a></li>
-        <li><a>Магазин</a></li>
+<!--        <li><a>Главная</a></li>-->
+<!--        <li><a>Магазин</a></li>-->
+        <li><router-link to="/">Главная</router-link></li>
+        <li><router-link to="/basket">Магазин</router-link></li>
       </ul>
     </nav>
-    <div class="basket">
+    <div class="basket" @click="routeInBasket()">
       <img src="../../assets/shopping_cart.svg" alt="shopping_cart" />
       <div v-if="productsInBasket.products.length > 0" class="red-circle inherit">{{productsInBasket.products.length}}</div>
     </div>
@@ -74,6 +77,7 @@ export default defineComponent({
         a {
           font-weight: 500;
           font-size: 20px;
+          text-decoration: none;
         }
       }
 

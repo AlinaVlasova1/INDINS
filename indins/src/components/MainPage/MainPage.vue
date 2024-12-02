@@ -1,7 +1,6 @@
 <script lang="ts">
 
 import { defineComponent, reactive} from "vue";
-import AdvertisementsAndProductPage from "@/components/AdvertisementsAndProductsPage/AdvertisementsAndProductPage.vue";
 import HeaderBlock from "@/components/Header/Header.vue";
 import FooterBlock from "@/components/Footer/Footer.vue";
 import {IProduct} from "@/models/product-models";
@@ -9,7 +8,7 @@ import {IProduct} from "@/models/product-models";
 
 export default defineComponent({
   name: "MainPage",
-  components: {FooterBlock, HeaderBlock, AdvertisementsAndProductPage},
+  components: {FooterBlock, HeaderBlock},
   setup() {
     const productsInBasket = reactive({products: [] as IProduct[]});
     return {
@@ -27,7 +26,8 @@ export default defineComponent({
 <template>
   <div class="main-page">
     <HeaderBlock :productsInBasket="productsInBasket"></HeaderBlock>
-    <AdvertisementsAndProductPage v-on:addProduct="addBasketProduct"></AdvertisementsAndProductPage>
+    <router-view v-on:addProduct="addBasketProduct" :productsInBasket="productsInBasket"></router-view>
+<!--    <AdvertisementsAndProductPage v-on:addProduct="addBasketProduct"></AdvertisementsAndProductPage>-->
     <FooterBlock></FooterBlock>
   </div>
 </template>

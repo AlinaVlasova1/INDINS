@@ -1,7 +1,7 @@
 export interface IProduct {
     id: number,
     title: string,
-    price: string,
+    price: number,
     category: string,
     description: string,
     image: string,
@@ -17,4 +17,9 @@ export interface IResponseProducts {
 
 export interface IResponseProduct {
     data: IProduct;
+}
+
+export interface IProductInBasket extends IProduct {
+    count: number,
+    cost: number,
 }

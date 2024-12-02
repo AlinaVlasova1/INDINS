@@ -13,10 +13,6 @@ export default defineComponent({
       this.$emit("addProduct", product);
     }
   },
-  data() {
-    return {
-    }
-  },
 })
 </script>
 
