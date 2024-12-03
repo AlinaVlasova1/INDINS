@@ -10,6 +10,6 @@ export class ProductService {
     }
 
     getProductById(id:number): Promise<IResponseProduct> {
-        return axios.get(`${this.url.toString()}/${id}`);
+        return axios.get(`${this.url}/${id}`);
     }
 }

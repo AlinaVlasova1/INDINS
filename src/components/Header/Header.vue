@@ -18,7 +18,7 @@ export default defineComponent({
     <h2>Штуки</h2>
     <nav class="nav-menu">
       <ul>
-        <li><router-link to="/">Главная</router-link></li>
+        <li><router-link to="/home">Главная</router-link></li>
         <li><router-link to="/basket">Магазин</router-link></li>
       </ul>
     </nav>

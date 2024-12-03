@@ -15,10 +15,15 @@ Vue.use(Router);
 
 
 const routes: RouteConfig[] = [
-  {path: '/', name: 'MainPage', component: MainPage, children: [
-      { path: '', name: 'AdvertisementsAndProductPage' , component: AdvertisementsAndProductPage},
-      { path: '/basket', name: 'BasketPage', component: BasketPage as Component}
-    ]},
+  { path: '/',
+      name: 'MainPage',
+      component: MainPage,
+      children: [
+          { path: '/home', name: 'AdvertisementsAndProductPage' , component: AdvertisementsAndProductPage as Component},
+          { path: '/basket', name: 'BasketPage', component: BasketPage as Component},
+          { path: '*', component: AdvertisementsAndProductPage as Component}
+    ]
+  },
 ]
 
 const router:Router = new Router({

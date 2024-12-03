@@ -40,7 +40,7 @@ export default defineComponent({
         const element = this.newArrayProductsInBasket.find(el => el.id === product.id);
         const index = element ? this.newArrayProductsInBasket.indexOf(element) : undefined;
         if (index !== undefined) {
-          this.newArrayProductsInBasket[index].count = this.newArrayProductsInBasket[index]?.count + 1;
+          this.newArrayProductsInBasket[index].count = this.newArrayProductsInBasket[index].count + 1;
           this.newArrayProductsInBasket[index].cost = this.newArrayProductsInBasket[index].price * this.newArrayProductsInBasket[index]?.count
         }
       } else {

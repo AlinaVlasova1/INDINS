@@ -20,12 +20,8 @@ export default defineComponent({
       this.productsInBasket.products.push(product);
     },
     deleteProduct( obj: {id: number, count: number}) {
-      if (obj.count < 2) {
+      for (let i = 1; i <= obj.count; i++) {
         this.deleteElementArrayById(obj.id, this.productsInBasket.products);
-      } else {
-        for (let i = 1; i <= obj.count; i++) {
-          this.deleteElementArrayById(obj.id, this.productsInBasket.products);
-        }
       }
 
     },
