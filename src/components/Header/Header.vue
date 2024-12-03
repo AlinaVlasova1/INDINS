@@ -80,7 +80,7 @@ export default defineComponent({
 
       .link  {
         vertical-align: middle;
-        display: inline-block;
+        display: inline-block !important;
 
         a, a:visited, a:hover, a:active {
           font-weight: 500;
