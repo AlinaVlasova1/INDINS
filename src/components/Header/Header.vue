@@ -40,7 +40,7 @@ export default defineComponent({
     border: 2px solid #275742;
     width: 100%;
     height: 64px;
-    display: block;
+    display: flex;
     color: #275742;
     text-align: left;
     position: relative;
@@ -56,18 +56,22 @@ export default defineComponent({
       margin: 13px 0 0 24px;
     }
 
-    nav {
+    .nav-menu  {
       display: inline-block;
       height: 100%;
-      margin-left: 35%;
+      width: 250px;
+      text-align: center;
+      vertical-align: top;
+      margin: 0 auto;
     }
 
     ul {
       list-style: none;
       display: inline-block;
       width: 250px;
-      margin-top: 0;
-      margin-bottom: 0;
+      vertical-align: top;
+      padding-left: 0;
+
 
       li {
         display: inline-block;
@@ -88,7 +92,7 @@ export default defineComponent({
     .basket {
       position: absolute;
       display: inline-block;
-      top: 12px;
+      top: 14px;
       bottom: auto;
       right: 24px;
       left: auto;

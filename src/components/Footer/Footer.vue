@@ -31,7 +31,7 @@ export default defineComponent({
     width: 100%;
     background-color: #275742;
     height: 124px;
-    display: block;
+    display: flex;
     color: #FFFF;
     text-align: left;
     position: relative;
@@ -46,21 +46,31 @@ export default defineComponent({
       margin: 43px 0 0 24px;
     }
 
-    nav {
+    .nav-menu {
       display: inline-block;
       height: 100%;
-      margin-left: 35%;
+      width: 250px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
     }
 
     ul {
       list-style: none;
-      display: inline-block;
+      display: flex;
       width: 250px;
-      margin-top: 0;
-      margin-bottom: 0;
+      vertical-align: middle;
+      justify-content: center;
+      padding-left: 0;
+      margin-top: auto;
+      margin-bottom: auto;
+      height: 100%;
+      align-items: center;
 
       li {
         display: inline-block;
+        vertical-align: middle;
+
 
         a, a:visited, a:hover, a:active {
           font-weight: 500;
