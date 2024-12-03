@@ -83,7 +83,7 @@ export default defineComponent({
         <th class="title">Итог</th>
         <th></th>
         <th>{{allCountProduct}}</th>
-        <th>{{allCostProduct}}</th>
+        <th>{{allCostProduct.toFixed(2)}}</th>
         <th></th>
       </tr>
       </tfoot>
