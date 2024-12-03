@@ -27,7 +27,7 @@ export default defineComponent({
       const element = this.newArrayProductsInBasket.find((el) => el.id === id);
       const index = element ? this.newArrayProductsInBasket.indexOf(element) : undefined;
       if (index !== undefined) {
-        this.$emit("deleteProduct", {id: id, count: this.newArrayProductsInBasket[index].count});
+        this.$emit("deleteProduct", id);
         this.newArrayProductsInBasket.splice(index, 1);
       }
       this.calculate();

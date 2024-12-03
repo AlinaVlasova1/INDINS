@@ -19,19 +19,9 @@ export default defineComponent({
     addBasketProduct(product: IProduct) {
       this.productsInBasket.products.push(product);
     },
-    deleteProduct( obj: {id: number, count: number}) {
-      for (let i = 1; i <= obj.count; i++) {
-        this.deleteElementArrayById(obj.id, this.productsInBasket.products);
-      }
-
+    deleteProductsById( id: number) {
+      this.productsInBasket.products = [...this.productsInBasket.products.filter((el) => el.id !== id)]
     },
-    deleteElementArrayById(id: number, array: IProduct[]) {
-      const element = array.find((element: IProduct) => element.id === id);
-      const index = element ? array.indexOf(element) : undefined;
-      if (index !== undefined) {
-        array.splice(index, 1);
-      }
-    }
   },
 })
 </script>
@@ -41,7 +31,7 @@ export default defineComponent({
     <HeaderBlock :productsInBasket="productsInBasket"></HeaderBlock>
     <router-view v-on:addProduct="addBasketProduct"
                  :productsInBasket="productsInBasket"
-                 v-on:deleteProduct="deleteProduct"></router-view>
+                 v-on:deleteProduct="deleteProductsById"></router-view>
     <FooterBlock></FooterBlock>
   </div>
 </template>
