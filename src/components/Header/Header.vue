@@ -82,6 +82,7 @@ export default defineComponent({
 
       li {
         display: inline-block;
+        vertical-align: middle;
 
         a, a:visited, a:hover, a:active {
           font-weight: 500;
