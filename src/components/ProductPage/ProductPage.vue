@@ -2,7 +2,8 @@
 
 import {defineComponent, reactive} from "vue";
 import {ProductService} from "@/services/products-service";
-import {IProduct, IResponseProduct} from "@/models/product-models";
+import {IProduct} from "@/models/product-models";
+import {IResponseProduct} from "@/models/product-models-responce";
 
 export default defineComponent({
   name: "ProductPage",
@@ -124,13 +125,14 @@ export default defineComponent({
 
       width: 542px;
       height: 519px;
+      display: flex;
 
       img {
         width: auto;
         height: auto;
         max-height: 439px;
         max-width: 462px;
-        margin: 40px;
+        margin: 40px auto;
       }
     }
 

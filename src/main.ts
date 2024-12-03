@@ -15,23 +15,22 @@ Vue.use(Router);
 
 
 const routes: RouteConfig[] = [
-  {path: '/', name: 'MainPage', component: MainPage, children: [
-      { path: '', name: 'AdvertisementsAndProductPage' , component: AdvertisementsAndProductPage},
-      { path: '/basket', name: 'BasketPage', component: BasketPage as Component}
-    ]},
+  { path: '/',
+      name: 'MainPage',
+      component: MainPage,
+      children: [
+          { path: '/home', name: 'AdvertisementsAndProductPage' , component: AdvertisementsAndProductPage as Component},
+          { path: '/basket', name: 'BasketPage', component: BasketPage as Component},
+          { path: '*', component: AdvertisementsAndProductPage as Component}
+    ]
+  },
 ]
 
 const router:Router = new Router({
-  mode: "history",
-  routes: routes // short for `routes: routes`
+    mode: "history",
+    base: process.env.BASE_URL,
+    routes: routes // short for `routes: routes`
 })
-// const router = new VueRouter({
-//   routes // short for `routes: routes`
-// })
-// const app = new Vue({
-//   router,
-//   render: h => h(App)
-// }).$mount('#app')
 
 new Vue({
   router,

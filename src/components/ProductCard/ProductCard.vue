@@ -49,7 +49,7 @@ export default defineComponent({
       font-weight: 500;
       font-size: 25px;
       color: #275742;
-      height: 57px;
+      height: 86px;
       display: inline-block;
       margin-bottom: 16px;
       margin-top: 16px;

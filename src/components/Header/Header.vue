@@ -1,13 +1,20 @@
 <script lang="ts">
 import {defineComponent} from "vue";
+import {IPlacementInBasket} from "@/models/product-models";
 
 export default defineComponent({
   name: "HeaderBlock",
   components: {},
-  props: ['productsInBasket'],
+  props: ['placementsInBasket'],
   methods: {
     routeInBasket() {
       this.$router.push({path: '/basket'});
+    },
+    calculateTotalCountPlacementsInBasket() {
+      return this.placementsInBasket.placements.reduce((acc: number, current: IPlacementInBasket) => {
+        acc += current.count;
+        return acc;
+      }, 0);
     }
   }
 })
@@ -18,13 +25,13 @@ export default defineComponent({
     <h2>Штуки</h2>
     <nav class="nav-menu">
       <ul>
-        <li><router-link to="/">Главная</router-link></li>
-        <li><router-link to="/basket">Магазин</router-link></li>
+        <li class="link"><router-link to="/home">Главная</router-link></li>
+        <li class="link"><router-link to="/basket">Магазин</router-link></li>
       </ul>
     </nav>
     <div class="basket" @click="routeInBasket()">
       <img src="../../assets/shopping_cart.svg" alt="shopping_cart" />
-      <div v-if="productsInBasket.products.length > 0" class="red-circle inherit">{{productsInBasket.products.length}}</div>
+      <div v-if="calculateTotalCountPlacementsInBasket() > 0" class="red-circle inherit">{{calculateTotalCountPlacementsInBasket()}}</div>
     </div>
   </header>
 </template>
@@ -40,9 +47,8 @@ export default defineComponent({
     border: 2px solid #275742;
     width: 100%;
     height: 64px;
-    display: block;
+    display: flex;
     color: #275742;
-    text-align: left;
     position: relative;
     box-sizing: border-box;
 
@@ -56,20 +62,24 @@ export default defineComponent({
       margin: 13px 0 0 24px;
     }
 
-    nav {
+    .nav-menu  {
       display: inline-block;
       height: 100%;
-      margin-left: 35%;
+      width: 250px;
+      text-align: center;
+      vertical-align: top;
+      margin: 0 auto;
     }
 
     ul {
       list-style: none;
       display: inline-block;
       width: 250px;
-      margin-top: 0;
-      margin-bottom: 0;
+      vertical-align: top;
+      padding-left: 0;
 
-      li {
+      .link  {
+        vertical-align: middle;
         display: inline-block;
 
         a, a:visited, a:hover, a:active {
@@ -88,7 +98,7 @@ export default defineComponent({
     .basket {
       position: absolute;
       display: inline-block;
-      top: 12px;
+      top: 14px;
       bottom: auto;
       right: 24px;
       left: auto;
