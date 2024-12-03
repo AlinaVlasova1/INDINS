@@ -11,14 +11,6 @@ export interface IProduct {
     },
 }
 
-export interface IResponseProducts {
-    data: IProduct[];
-}
-
-export interface IResponseProduct {
-    data: IProduct;
-}
-
 export interface IProductInBasket extends IProduct {
     count: number,
     cost: number,

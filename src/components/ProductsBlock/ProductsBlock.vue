@@ -2,9 +2,10 @@
 
 import {defineComponent, reactive} from "vue";
 import {ProductService} from "@/services/products-service";
-import {IProduct, IResponseProducts} from "@/models/product-models";
+import {IProduct} from "@/models/product-models";
 import ProductCard from "@/components/ProductCard/ProductCard.vue";
 import ProductPage from "@/components/ProductPage/ProductPage.vue";
+import {IResponseProducts} from "@/models/product-models-responce";
 
 export default defineComponent({
   name: "ProductsBlock",

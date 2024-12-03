@@ -2,7 +2,8 @@
 
 import {defineComponent, reactive} from "vue";
 import {ProductService} from "@/services/products-service";
-import {IProduct, IResponseProduct} from "@/models/product-models";
+import {IProduct} from "@/models/product-models";
+import {IResponseProduct} from "@/models/product-models-responce";
 
 export default defineComponent({
   name: "ProductPage",

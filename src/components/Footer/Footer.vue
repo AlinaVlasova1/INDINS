@@ -5,10 +5,6 @@ import {defineComponent} from "vue";
 export default defineComponent({
   name: "FooterBlock",
   components: {},
-  data() {
-    return {
-    }
-  },
 })
 </script>
 

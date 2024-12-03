@@ -1,6 +1,6 @@
 import {ApiUrlFactory} from "@/services/api-url-factory";
 import axios from "axios";
-import {IResponseProduct, IResponseProducts} from "@/models/product-models";
+import {IResponseProduct, IResponseProducts} from "@/models/product-models-responce";
 
 export class ProductService {
     private readonly url= ApiUrlFactory.create('products');
