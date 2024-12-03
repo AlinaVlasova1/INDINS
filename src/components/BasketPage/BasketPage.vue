@@ -2,55 +2,33 @@
 
 
 import {defineComponent} from "vue";
-import {IProduct, IProductInBasket} from "@/models/product-models";
+import {IPlacementInBasket} from "@/models/product-models";
 
 export default defineComponent({
   name: "BasketPage",
-  props: ['productsInBasket'],
+  props: ['placementsInBasket'],
   data() {
     return {
-      newArrayProductsInBasket: [] as IProductInBasket[],
-      allCountProduct: 0 as number,
-      allCostProduct: 0 as number
+      totalPlacementCount: 0 as number,
+      totalPlacementCost: 0 as number
     }
   },
   methods: {
     calculate() {
-      this.allCountProduct = 0;
-      this.allCostProduct = 0;
-      this.newArrayProductsInBasket.forEach((product: IProductInBasket) => {
-        this.allCountProduct = this.allCountProduct + product.count;
-        this.allCostProduct = this.allCostProduct + product.cost;
+      this.totalPlacementCount = 0;
+      this.totalPlacementCost = 0;
+      this.placementsInBasket.placements.forEach((product: IPlacementInBasket) => {
+        this.totalPlacementCount = this.totalPlacementCount + product.count;
+        this.totalPlacementCost = this.totalPlacementCost + product.cost;
       })
     },
     deleteProduct(id: number) {
-      const element = this.newArrayProductsInBasket.find((el) => el.id === id);
-      const index = element ? this.newArrayProductsInBasket.indexOf(element) : undefined;
-      if (index !== undefined) {
-        this.$emit("deleteProduct", id);
-        this.newArrayProductsInBasket.splice(index, 1);
-      }
+      this.$emit("deleteProduct", id);
       this.calculate();
 
     }
   },
   mounted() {
-    this.productsInBasket.products.forEach((product: IProduct) => {
-      if (this.newArrayProductsInBasket.find(el => el.id === product.id)) {
-        const element = this.newArrayProductsInBasket.find(el => el.id === product.id);
-        const index = element ? this.newArrayProductsInBasket.indexOf(element) : undefined;
-        if (index !== undefined) {
-          this.newArrayProductsInBasket[index].count = this.newArrayProductsInBasket[index].count + 1;
-          this.newArrayProductsInBasket[index].cost = this.newArrayProductsInBasket[index].price * this.newArrayProductsInBasket[index]?.count
-        }
-      } else {
-        this.newArrayProductsInBasket.push({
-          ...product,
-          count: 1,
-          cost: product.price
-        });
-      }
-    })
     this.calculate();
   }
 })
@@ -70,20 +48,20 @@ export default defineComponent({
       </tr>
       </thead>
       <tbody>
-      <tr class="row" v-for="(product, index) in newArrayProductsInBasket" :key="index">
-        <td>{{product.title}}</td>
-        <td>{{product.price}}</td>
-        <td>{{product.count}}</td>
-        <td>{{product.cost}}</td>
-        <td><img src="../../assets/trash_bin.svg" alt="trash_bin"  @click="deleteProduct(product.id)"></td>
+      <tr class="row" v-for="(placement, index) in placementsInBasket.placements" :key="index">
+        <td>{{placement.product.title}}</td>
+        <td>{{placement.product.price}}</td>
+        <td>{{placement.count}}</td>
+        <td>{{placement.cost}}</td>
+        <td><img src="../../assets/trash_bin.svg" alt="trash_bin"  @click="deleteProduct(placement.product.id)"></td>
       </tr>
       </tbody>
       <tfoot>
       <tr class="row">
         <th class="title">Итог</th>
         <th></th>
-        <th>{{allCountProduct}}</th>
-        <th>{{allCostProduct.toFixed(2)}}</th>
+        <th>{{ totalPlacementCount }}</th>
+        <th>{{ totalPlacementCost.toFixed(2) }}</th>
         <th></th>
       </tr>
       </tfoot>

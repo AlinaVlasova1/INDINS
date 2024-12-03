@@ -11,7 +11,8 @@ export interface IProduct {
     },
 }
 
-export interface IProductInBasket extends IProduct {
+export interface IPlacementInBasket {
+    product: IProduct,
     count: number,
     cost: number,
 }

@@ -1,13 +1,20 @@
 <script lang="ts">
 import {defineComponent} from "vue";
+import {IPlacementInBasket} from "@/models/product-models";
 
 export default defineComponent({
   name: "HeaderBlock",
   components: {},
-  props: ['productsInBasket'],
+  props: ['placementsInBasket'],
   methods: {
     routeInBasket() {
       this.$router.push({path: '/basket'});
+    },
+    calculateTotalCountPlacementsInBasket() {
+      return this.placementsInBasket.placements.reduce((acc: number, current: IPlacementInBasket) => {
+        acc += current.count;
+        return acc;
+      }, 0);
     }
   }
 })
@@ -24,7 +31,7 @@ export default defineComponent({
     </nav>
     <div class="basket" @click="routeInBasket()">
       <img src="../../assets/shopping_cart.svg" alt="shopping_cart" />
-      <div v-if="productsInBasket.products.length > 0" class="red-circle inherit">{{productsInBasket.products.length}}</div>
+      <div v-if="calculateTotalCountPlacementsInBasket() > 0" class="red-circle inherit">{{calculateTotalCountPlacementsInBasket()}}</div>
     </div>
   </header>
 </template>

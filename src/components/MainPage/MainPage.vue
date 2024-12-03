@@ -3,24 +3,34 @@
 import { defineComponent, reactive} from "vue";
 import HeaderBlock from "@/components/Header/Header.vue";
 import FooterBlock from "@/components/Footer/Footer.vue";
-import {IProduct} from "@/models/product-models";
+import {IPlacementInBasket, IProduct} from "@/models/product-models";
 
 
 export default defineComponent({
   name: "MainPage",
   components: {FooterBlock, HeaderBlock},
   setup() {
-    const productsInBasket = reactive({products: [] as IProduct[]});
+    const placementsInBasket = reactive({placements: [] as IPlacementInBasket[]});
     return {
-      productsInBasket,
+      placementsInBasket,
     }
   },
   methods: {
     addBasketProduct(product: IProduct) {
-      this.productsInBasket.products.push(product);
+      const findedEl = this.placementsInBasket.placements.find((el) => el.product.id === product.id)
+      if (findedEl) {
+        findedEl.count = findedEl.count + 1;
+        findedEl.cost = findedEl.count * findedEl.product.price;
+      } else {
+        this.placementsInBasket.placements.push({
+          product: product,
+          count: 1,
+          cost: product.price
+        });
+      }
     },
     deleteProductsById( id: number) {
-      this.productsInBasket.products = [...this.productsInBasket.products.filter((el) => el.id !== id)]
+      this.placementsInBasket.placements = [...this.placementsInBasket.placements.filter((el) => el.product.id !== id)]
     },
   },
 })
@@ -28,9 +38,9 @@ export default defineComponent({
 
 <template>
   <div class="main-page">
-    <HeaderBlock :productsInBasket="productsInBasket"></HeaderBlock>
+    <HeaderBlock :placementsInBasket="placementsInBasket"></HeaderBlock>
     <router-view v-on:addProduct="addBasketProduct"
-                 :productsInBasket="productsInBasket"
+                 :placementsInBasket="placementsInBasket"
                  v-on:deleteProduct="deleteProductsById"></router-view>
     <FooterBlock></FooterBlock>
   </div>
