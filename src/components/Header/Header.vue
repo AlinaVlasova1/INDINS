@@ -78,12 +78,9 @@ export default defineComponent({
       vertical-align: top;
       padding-left: 0;
 
-      .link {
-        display: inline-block;
-      }
-
-      li {
+      .link  {
         vertical-align: middle;
+        display: inline-block;
 
         a, a:visited, a:hover, a:active {
           font-weight: 500;
