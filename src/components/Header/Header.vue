@@ -25,8 +25,8 @@ export default defineComponent({
     <h2>Штуки</h2>
     <nav class="nav-menu">
       <ul>
-        <li><router-link to="/home">Главная</router-link></li>
-        <li><router-link to="/basket">Магазин</router-link></li>
+        <li class="link"><router-link to="/home">Главная</router-link></li>
+        <li class="link"><router-link to="/basket">Магазин</router-link></li>
       </ul>
     </nav>
     <div class="basket" @click="routeInBasket()">
@@ -49,7 +49,6 @@ export default defineComponent({
     height: 64px;
     display: flex;
     color: #275742;
-    text-align: left;
     position: relative;
     box-sizing: border-box;
 
@@ -79,9 +78,11 @@ export default defineComponent({
       vertical-align: top;
       padding-left: 0;
 
+      .link {
+        display: inline-block;
+      }
 
       li {
-        display: inline-block;
         vertical-align: middle;
 
         a, a:visited, a:hover, a:active {
