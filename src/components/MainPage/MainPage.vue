@@ -3,49 +3,45 @@
 import { defineComponent, reactive} from "vue";
 import HeaderBlock from "@/components/Header/Header.vue";
 import FooterBlock from "@/components/Footer/Footer.vue";
-import {IProduct} from "@/models/product-models";
+import {IPlacementInBasket, IProduct} from "@/models/product-models";
 
 
 export default defineComponent({
   name: "MainPage",
   components: {FooterBlock, HeaderBlock},
   setup() {
-    const productsInBasket = reactive({products: [] as IProduct[]});
+    const placementsInBasket = reactive({placements: [] as IPlacementInBasket[]});
     return {
-      productsInBasket,
+      placementsInBasket,
     }
   },
   methods: {
     addBasketProduct(product: IProduct) {
-      this.productsInBasket.products.push(product);
-    },
-    deleteProduct( obj: {id: number, count: number}) {
-      if (obj.count < 2) {
-        this.deleteElementArrayById(obj.id, this.productsInBasket.products);
+      const findedEl = this.placementsInBasket.placements.find((el) => el.product.id === product.id)
+      if (findedEl) {
+        findedEl.count = findedEl.count + 1;
+        findedEl.cost = findedEl.count * findedEl.product.price;
       } else {
-        for (let i = 1; i <= obj.count; i++) {
-          this.deleteElementArrayById(obj.id, this.productsInBasket.products);
-        }
+        this.placementsInBasket.placements.push({
+          product: product,
+          count: 1,
+          cost: product.price
+        });
       }
-
     },
-    deleteElementArrayById(id: number, array: IProduct[]) {
-      const element = array.find((element: IProduct) => element.id === id);
-      const index = element ? array.indexOf(element) : undefined;
-      if (index !== undefined) {
-        array.splice(index, 1);
-      }
-    }
+    deleteProductsById( id: number) {
+      this.placementsInBasket.placements = [...this.placementsInBasket.placements.filter((el) => el.product.id !== id)]
+    },
   },
 })
 </script>
 
 <template>
   <div class="main-page">
-    <HeaderBlock :productsInBasket="productsInBasket"></HeaderBlock>
+    <HeaderBlock :placementsInBasket="placementsInBasket"></HeaderBlock>
     <router-view v-on:addProduct="addBasketProduct"
-                 :productsInBasket="productsInBasket"
-                 v-on:deleteProduct="deleteProduct"></router-view>
+                 :placementsInBasket="placementsInBasket"
+                 v-on:deleteProduct="deleteProductsById"></router-view>
     <FooterBlock></FooterBlock>
   </div>
 </template>
