@@ -80,44 +80,44 @@ export default defineComponent({
 
       .link  {
         vertical-align: middle;
-        display: inline-block;
+        display: inline-block !important; /*добавлен !important, так как в GitHub Pages именно это правило отсуствует в стилях страницы*/
 
-        a, a:visited, a:hover, a:active {
-          font-weight: 500;
-          font-size: 20px;
-          text-decoration: none;
-          color: inherit;
-        }
-      }
+a, a:visited, a:hover, a:active {
+  font-weight: 500;
+  font-size: 20px;
+  text-decoration: none;
+  color: inherit;
+}
+}
 
-      li:first-child {
-        margin-right: 32px;
-      }
-    }
+li:first-child {
+margin-right: 32px;
+}
+}
 
-    .basket {
-      position: absolute;
-      display: inline-block;
-      top: 14px;
-      bottom: auto;
-      right: 24px;
-      left: auto;
-    }
+.basket {
+position: absolute;
+display: inline-block;
+top: 14px;
+bottom: auto;
+right: 24px;
+left: auto;
+}
 
-    .red-circle {
-      position: relative;
-      width: 16px;
-      height: 16px;
-      background-color: #C95103;
-      border-radius: 8px;
-      top: -40px;
-      left: 22px;
-      color: white;
-      text-align: center;
-      font-size: 10px;
-      font-weight: 500;
-      line-height: 15px;
-    }
-  }
+.red-circle {
+position: relative;
+width: 16px;
+height: 16px;
+background-color: #C95103;
+border-radius: 8px;
+top: -40px;
+left: 22px;
+color: white;
+text-align: center;
+font-size: 10px;
+font-weight: 500;
+line-height: 15px;
+}
+}
 
 </style>
